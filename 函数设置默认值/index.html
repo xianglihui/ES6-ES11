@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const add = (a, b, c) => a + b + c;
+      console.log("add", add(1, 2, 3)); // 6
+      // 不结合解构赋值
+      const Person = (userInfo) => {
+        const name = userInfo.name;
+        const age = userInfo.age;
+        const sex = userInfo.sex;
+      };
+      Person({
+        name: "张三",
+        age: 18,
+        sex: "男",
+      });
+    </script>
+  </body>
+</html>

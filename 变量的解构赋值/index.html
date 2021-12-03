@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ES6允许按照一定模式从数组和对象提取值，对变量进行赋值
+      // 这被称为解构赋值
+
+      // 1.数组的解构
+      const list = ["张三", "李四", "王五"];
+      const [a, b, c] = list;
+      console.log(a);
+      console.log(b);
+      console.log(c);
+      
+      // 2.对象的解构
+      const obj = {
+        name: "张三",
+        age: 18,
+        speck: function () {
+          console.log("今年18");
+        },
+      };
+      const { name, age, speck } = obj;
+      console.log(name); // 张三
+      console.log(age); // 李四
+      console.log(speck); // 王五
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 扩展运算符能将数组转换威逗号分隔的参数序列
+      const person = ["张三", "李四", "王五"]; // => "张三", "李四", "王五"
+      // 声明一个函数
+      function list() {
+        console.log(arguments);
+      }
+      list(person); //Arguments(1) 0: (3) ['张三', '李四', '王五']
+      // if
+      list(...person); // Arguments(3) ['张三', '李四', '王五', callee: ƒ, Symbol(Symbol.iterator): ƒ]
+
+      // 扩展运算符的应用
+      // 数组合并
+      const shool = ["清华", "北大", "复旦"];
+      const shool2 = ["浙大", "理工"];
+      // es5
+      const test = shool.concat(shool2);
+      console.log(test);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="name">name</div>
+    <script>
+      // 普通函数
+      function getName() {
+        console.log(this.name);
+      }
+      // 箭头函数
+      const getName2 = () => {
+        console.log(this.name);
+      };
+
+      window.name = "张三";
+      const age = {
+        name: "李四",
+      };
+      // 直接调用
+      // getName(); // 张三
+      // getName2(); // 张三
+
+      // call改变指向
+      getName.call(age);
+      getName2.call(age);
+
+      // 不能作为构造器
+      const Person = (name, age) => {
+        this.name = name;
+        this.age = age;
+      };
+      // const my = new Person("张三", 18);
+
+      // 不能使用 `arguments` 变量
+
+      // 普通函数
+      function fn() {
+        console.log("普通函数的arguments", arguments);
+      }
+      // 箭头函数
+      const fn1 = () => {
+        // ReferenceError: arguments is not defined
+        // console.log("箭头函数的arguments", arguments);
+      };
+      fn(1, 2, 3);
+      fn1(1, 2, 3);
+
+      // 箭头函数的简写
+      // 1)省略小括号
+      const add = (n) => {
+        return n + n;
+      };
+      console.log("add()", add(9)); // 18
+      // 2）省略大括号
+      const pow = (n) => n * n;
+      console.log("pow()", pow(9)); // 81
+      // 案例
+      setTimeout(function () {}, 1000);
+      // 箭头函数
+      setTimeout(() => {}, 1000);
+
+      // 例子  箭头函数不适合与 this 有关的回调，如事件回调，对象方法
+      let alertName = {
+        name: "张三",
+        init: function () {
+          document.getElementById("name").onClick = () => {
+            alert(this.name);
+          };
+        },
+      };
+      alertName.init();
+      let alertName2 = {
+        name: "李四",
+        init: () => {
+          document.getElementById("name").onClick = () => {
+            alert(this.name);
+          };
+        },
+      };
+      alertName2.init();
+    </script>
+  </body>
+</html>
