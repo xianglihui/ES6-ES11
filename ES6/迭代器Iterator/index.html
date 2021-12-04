@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const list = ["张三", "李四", "王五"];
+      //   for (let i of list) {
+      //     console.log(i);
+      //   }
+      //   console.log("list", list); // Symbol(Symbol.iterator): ƒ values()
+
+      const iterator = list[Symbol.iterator]();
+      console.log(iterator); // next: ƒ next()
+
+      console.log(iterator.next()); // {value: '张三', done: false}
+      //   console.log(iterator.next()); //{value: '李四', done: false}
+      //   console.log(iterator.next()); // {value: '王五', done: false}
+      //   console.log(iterator.next()); //{value: undefined, done: true}
+
+      // 案例
+      //   const s11 = {
+      //     name: "EDG",
+      //     stus: ["Flandre", "Jiejie", "Scout", "Viper", "Meiko"],
+      //   };
+      // 遍历对象
+      //   for (let v of s11) {
+      //     console.log(v); // Uncaught TypeError: s11 is not iterable
+      //   }
+      // 需求：使用for...of来遍历，每次返回的是stus数组的成员
+
+      // false
+
+      //   const s11 = {
+      //     name: "EDG",
+      //     stus: ["Flandre", "Jiejie", "Scout", "Viper", "Meiko"],
+      //     [Symbol.iterator]() {},
+      //   };
+      //   for (let v of s11) {
+      //     // index.html:41 Uncaught TypeError: Result of the Symbol.iterator method is not an object
+      //     console.log(v);
+      //   }
+
+      // false
+
+      //   const s11 = {
+      //     name: "EDG",
+      //     stus: ["Flandre", "Jiejie", "Scout", "Viper", "Meiko"],
+      //     [Symbol.iterator]() {
+      //       return {};
+      //     },
+      //   };
+      //   for (let v of s11) {
+      //     console.log(v);
+      //   }
+
+      // false
+
+      //   const s11 = {
+      //     name: "EDG",
+      //     stus: ["Flandre", "Jiejie", "Scout", "Viper", "Meiko"],
+      //     [Symbol.iterator]() {
+      //       return {
+      //         next: function () {},
+      //       };
+      //     },
+      //   };
+      //   for (let v of s11) {
+      //     // index.html:72 Uncaught TypeError: Iterator result undefined is not an object
+      //     console.log(v);
+      //   }
+
+      // true
+
+      const s11 = {
+        name: "EDG",
+        stus: ["Flandre", "Jiejie", "Scout", "Viper", "Meiko"],
+        [Symbol.iterator]() {
+          // 索引变量
+          let index = 0;
+          return {
+            next: () => {
+              if (index < this.stus.length) {
+                const result = { value: this.stus[index], done: false };
+                // 下标自增
+                index++;
+                // 返回结果
+                return result;
+              } else {
+                return { value: undefined, done: true };
+              }
+            },
+          };
+        },
+      };
+      for (let v of s11) {
+        console.log(v); // 依次输出 Flandre Jiejie Scout Viper Meiko
+      }
+    </script>
+  </body>
+</html>

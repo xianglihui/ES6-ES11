@@ -14,7 +14,7 @@
       function list() {
         console.log(arguments);
       }
-      list(person); //Arguments(1) 0: (3) ['张三', '李四', '王五']
+      list(person); // Arguments(1) 0: (3) ['张三', '李四', '王五'] 
       // if
       list(...person); // Arguments(3) ['张三', '李四', '王五', callee: ƒ, Symbol(Symbol.iterator): ƒ]
 
@@ -25,6 +25,9 @@
       // es5
       const test = shool.concat(shool2);
       console.log(test);
+      const names = ["张三", "李四", "王五"];
+      const copyNames = [...names];
+      console.log(copyNames); // ["张三", "李四", "王五"]
     </script>
   </body>
 </html>

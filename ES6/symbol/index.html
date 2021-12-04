@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 创建symbol
+      const t = Symbol();
+      console.log(t, typeof t);
+      // or
+      const t1 = Symbol("张三");
+      console.log(t1, typeof t1);
+
+      // Symbol.for 创建
+      const t2 = Symbol.for("李四");
+      console.log(t2, typeof t2);
+
+      // Symbol的使用
+      // 向对象中添加方法
+
+      let tools = {
+        name: "工具箱",
+        // up
+        [Symbol("up")]: function () {
+          console.log("++");
+        },
+        // down
+        [Symbol("down")]: function () {
+          console.log("--");
+        },
+      };
+      console.log(tools);
+    </script>
+  </body>
+</html>
