@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const list = ["张三", "李四", "王五"];
+      for (let i of list) {
+        console.log("i", i); // in proper order console 张三 李四 王五
+      }
+      console.log("list", list); // Prototype原型上存在 Symbol(Symbol.iterator): ƒ values()
+      // tip: Symbol.iterator 为每一个对象定义了默认的迭代器
+
+      // when i
+      const iterator = list[Symbol.iterator]();
+      console.log(iterator); // next: ƒ next()
+      // tip:next()是迭代的关键
+
+      // if
+      console.log(iterator.next()); // {value: '张三', done: false}
+      // tip:done代表迭代未完成
+
+      // 结合生成器
+      function* gen() {
+        // when i console
+        console.log("test");
+        yield "1";
+        yield "2";
+        yield "3";
+      }
+      let genIterator = gen();
+      console.log("genIterator", genIterator); // but no console 'test',you can see next: ƒ next()
+      // need
+      genIterator.next(); // test
+      // if
+      console.log("genIterator.next()", genIterator.next()); // genIterator.next() {value: '2', done: false}
+    </script>
+  </body>
+</html>

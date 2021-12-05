@@ -31,19 +31,37 @@
       //   console.log(iterator); // 并没有输出generator 而是迭代器对象 next: ƒ next()
 
       // 可以用iterator接口输出
-    //   iterator.next(); // 1
-    //   iterator.next(); // 2
-    //   iterator.next(); // 3
-    //   iterator.next(); // 4
+      //   iterator.next(); // 1
+      //   iterator.next(); // 2
+      //   iterator.next(); // 3
+      //   iterator.next(); // 4
 
       //通过for of遍历 拿到值
       for (let i of gen()) {
-        console.log(i);
+        // console.log(i);
       }
       let iterator = gen();
-      console.log(iterator.next());
-      console.log(iterator.next());
-      console.log(iterator.next());
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+
+      // 生成器函数参数
+      function* gen2(arg) {
+        console.log(arg);
+        const one = yield 111;
+        console.log(one);
+        yield 222;
+        yield 333;
+      }
+
+      //执行获取迭代器对象
+      let interator2 = gen2("AAA");
+      // when i
+      console.log(interator2.next()); // AAA
+
+      // next()也可以接受参数
+      // if
+      console.log(interator2.next("BBB"));
     </script>
   </body>
 </html>
