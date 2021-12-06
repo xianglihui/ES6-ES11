@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 依次获取 用户数据 订单数据 商品数据
+
+      // 用户数据
+      function getUserInfo() {
+        setTimeout(() => {
+          let data = "用户数据";
+          // second 调用next方法 并将数据返回
+          iterator.next(data); // 第二次调用 它的实参data将作为第一个yield语句的返回值
+        }, 1000);
+      }
+      // 订单数据
+      function ordersInfo() {
+        setTimeout(() => {
+          let data = "订单数据";
+          iterator.next(data); // 第三次调用 它的实参data将作为第二个yield语句的返回值
+        }, 1000);
+      }
+      // 商品数据
+      function goodsInfo() {
+        setTimeout(() => {
+          let data = "商品数据";
+          iterator.next(data);
+        }, 1000);
+      }
+
+      // 生成器
+      function* gen() {
+        // second 第二次调用 有传参
+        const User = yield getUserInfo();
+        console.log("User", User); // 用户数据
+        const orders = yield ordersInfo();
+        console.log("orders", orders); // 订单数据
+        const goods = yield goodsInfo();
+        console.log("goods", goods); // 商品数据
+      }
+
+      // 调用生成器函数
+      let iterator = gen();
+
+      // first getUserInfo()没有返回值 不用接收
+      iterator.next(); // first 第一次调用 执行的是gen()第一段代码 yield getUserInfo();， 运行结束会把结果返回  enter second
+    </script>
+  </body>
+</html>

@@ -5,6 +5,18 @@
 1. ES6 有一种新的遍历命令 for...of 循环，Iterator 接口主要供 for...of 消费
 2. 原生具备 Iterator 接口（这里的接口，指的是对象里的一个属性 Symbol.Iterator）的数据（可用 for...of 遍历）
 
+## 什么是迭代（遍历器）
+
+在 es5 中，最常使用表示“集合”的数据结构主要是数组（Array）和普通对象（Object），这些“集合”类元素都是由一系列的成员构成的，在日常工作中，都会有访问“集合”中每一个成员的需求。
+
+### es5
+
+数组（Array）成员主要通过 for 循环或原型方法 forEach,map 等方法来遍历，而对象（Object）则没有方法直接遍历（for … in、Object.keys()等都是在遍历 key，而不是 value）
+
+### es6
+
+新增的 Map 和 Set 提供了统一的遍历机制：遍历器（Iterator），并新增了 for … of 语法来使用遍历器。
+
 - Array
 - Arguments
 - Set
@@ -16,24 +28,33 @@
 ## 工作原理
 
 ```javascript
+// 使用for … of 语法来实现遍历器
 const list = ["张三", "李四", "王五"];
 for (let i of list) {
-  console.log(i); // 张三 李四 王五
+  console.log(i); // in proper order console 张三 李四 王五
 }
-console.log("list", list); // Symbol(Symbol.iterator): ƒ values()
+// console
+console.log("list", list);
+// > [[Prototype]]
+//  > Symbol(Symbol.iterator): ƒ values()
 ```
 
-这里 Symbol(Symbol.iterator)对应的值是一个函数。
+打印 list，你可以在原型对象`Prototype`下看见`Symbol(Symbol.iterator): ƒ values()`
+,(`Symbol.iterator`定义一个对象的遍历器方法。凡是具有[Symbol.iterator]方法的对象都是可遍历的，可以使用 for … of 循环依次输出对象的每个属性)
 
-为什么能够实现迭代（遍历）？
+### 为什么能够实现迭代（遍历）？
 
 1. 创建一个指针对象，指向当前数据结构的起始位置
 
 `Symbol(Symbol.iterator)`对应的函数创建一个对象
 
 ```javascript
-const iterator = list[Symbol.iterator]();
-console.log(iterator); // next: ƒ next()
+const list = ["张三", "李四", "王五"];
+const iterator = list[Symbol.iterator](); // Symbol(Symbol.iterator)对应的值是一个函数,这里属于函数调用
+console.log(iterator);
+// > [[Prototype]]: Array Iterator
+//  > next: ƒ next()
+// next方法，每次调用该方法可以依次枚举目标“集合”成员
 ```
 
 2. 第一次调用对下的 next 方法，指针自动指向数据结构的第一个成员
@@ -173,6 +194,6 @@ const s11 = {
   },
 };
 for (let v of s11) {
-  console.log(v);  // 依次输出 Flandre Jiejie Scout Viper Meiko
+  console.log(v); // 依次输出 Flandre Jiejie Scout Viper Meiko
 }
 ```

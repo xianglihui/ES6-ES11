@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   function* gen() {
+      //     console.log("generator");
+      //   }
+      //   let iterator = gen();
+      //   console.log(iterator); // 并没有输出generator 而是迭代器对象 next: ƒ next()
+
+      //   // 可以用iterator接口输出
+      //   iterator.next(); // generator
+
+      // yield 函数代码的分隔符
+      function* gen() {
+        // console.log(1);
+        yield "张三";
+        // console.log(2);
+        yield "18";
+        // console.log(3);
+        yield "男";
+        // console.log(4);
+      }
+      //   let iterator = gen();
+      //   console.log(iterator); // 并没有输出generator 而是迭代器对象 next: ƒ next()
+
+      // 可以用iterator接口输出
+      //   iterator.next(); // 1
+      //   iterator.next(); // 2
+      //   iterator.next(); // 3
+      //   iterator.next(); // 4
+
+      //通过for of遍历 拿到值
+      for (let i of gen()) {
+        // console.log(i);
+      }
+      let iterator = gen();
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+
+      // 生成器函数参数
+      function* gen2(arg) {
+        console.log(arg);
+        const one = yield 111;
+        console.log(one);
+        yield 222;
+        yield 333;
+      }
+
+      //执行获取迭代器对象
+      let interator2 = gen2("AAA");
+      // when i
+      console.log(interator2.next()); // AAA
+
+      // next()也可以接受参数
+      // if
+      console.log(interator2.next("BBB"));
+    </script>
+  </body>
+</html>
