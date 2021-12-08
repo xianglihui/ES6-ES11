@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const a = new Map();
+      //   console.log(a, typeof a); // Map(0) {size: 0}[[Entries]]No propertiessize: 0[[Prototype]]: Map 'object'
+
+      // set 添加元素
+      a.set("name", "张三");
+      // 0: {"name" => "张三"}
+      //   key: "name";
+      //   value: "张三";
+      console.log("a", a);
+      // or
+      a.set("change", () => {
+        console.log("你好");
+      });
+      console.log("a", a); // key: "change" value: () => { console.log("你好"); }
+      // or
+      let key = {
+        shool: "985，211",
+      };
+      a.set(key, ["北大", "复旦"]);
+      console.log("a", a); // key: {shool: '985，211'} value: (2) ['北大', '复旦']
+
+      // size
+      console.log(a.size); // 3
+
+      // delete 输入key
+      console.log(a.delete("name")); // true
+
+      // get 获取
+      console.log(a.get("change")); // () => {console.log("你好");}
+
+      // 清空
+      // a.clear();
+      // console.log(a); //Map(0) {size: 0}
+
+      // for...of...
+      for (let n of a) {
+        console.log("n", n); //  ['change', ƒ] [{…}, Array(2)]
+      }
+    </script>
+  </body>
+</html>

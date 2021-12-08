@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const s = new Set();
+      console.log(s); // Set(0)
+      console.log(typeof s); // object
+
+      // 使用
+      const p = new Set(["张三", "李四", "王五", "张三"]);
+      console.log(p);
+
+      // 元素个数
+      console.log(p.size); // 3
+      // 添加新的元素
+      console.log(p.add("赵六")); // Set(4) {'张三', '李四', '王五', '赵六'}
+      // 删除元素
+      console.log(p.delete("张三")); // true
+      // 检测
+      console.log(p.has("李四")); // true
+      // 清空
+      //   p.clear();
+      //   console.log("p", p); // Set(0) {size: 0}
+      // for...of...
+      for (let i of p) {
+        console.log(i); // 依次打印 张三 李四 王五 赵六
+      }
+
+      // 数组去重
+      const arr = [1, 2, 3, 4, 5, 6, 1, 1, 2, 3];
+      const newArr = [...new Set(arr)];
+      console.log("newArr ", newArr); // newArr  (6) [1, 2, 3, 4, 5, 6]
+
+      // 交集
+      const arr2 = [2, 7, 9, 3];
+      const result = [...new Set(arr)].filter((item) => {
+        const test = new Set(arr2);
+        if (test.has(item)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      console.log("result", result); // result (2) [2, 3]
+
+      // 并集
+      const union = [...new Set([...arr, ...arr2])];
+      console.log("union", union); // union (8) [1, 2, 3, 4, 5, 6, 7, 9]
+
+      // 差集
+      const unUnion = [...new Set(arr)].filter(
+        (item) => !new Set(arr2).has(item)
+      );
+      console.log("unUnion", unUnion); // unUnion (4) [1, 4, 5, 6]
+    </script>
+  </body>
+</html>
