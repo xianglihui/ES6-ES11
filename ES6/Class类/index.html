@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <script>
+      // es5
+      function Phone(name, price) {
+        this.name = name;
+        this.price = price;
+      }
+      //添加方法
+      Phone.prototype.call = function () {
+        console.log("执行call方法");
+      };
+      let phone = new Phone("小米", 1999);
+      console.log(phone); // name: "小米" price: 1999 call: ƒ ()
+
+      // es6
+      class XiaoMi {
+        // constructor命名固定，调用new XiaoMi时会调用
+        constructor(type, price) {
+          this.type = type;
+          this.price = price;
+        }
+        // 方法
+        call() {
+          console.log("小米手机就是牛");
+        }
+      }
+      let xiaomi = new XiaoMi("小米11", 1999); // XiaoMi {type: '小米11', price: 1999}
+      console.log(xiaomi);
+    </script>
+  </body>
 </html>
