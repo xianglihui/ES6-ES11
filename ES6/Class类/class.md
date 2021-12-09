@@ -11,7 +11,7 @@ ES6 提供更加接近面向对象的写法，引入 Class（类）这个概念�
 5. static 定义静态方法和属性
 6. 父类方法可以重写
 
-## 例子
+## 基本使用
 
 ```javascript
 // es5
@@ -41,3 +41,5 @@ class XiaoMi {
 let xiaomi = new XiaoMi("小米11", 1999); // XiaoMi {type: '小米11', price: 1999}
 console.log(xiaomi);
 ```
+
+## 类的静态成员

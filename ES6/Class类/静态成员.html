@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // es5
+      // 构造函数Phone本身也是个对象
+      function Phone() {}
+      // 函数对象上添加属性
+      Phone.name = "apple";
+      // 函数对象上添加方法
+      Phone.change = function () {
+        console.log("13香");
+      };
+      const apple = new Phone();
+      console.log(apple.name); // undefined
+      // 实例上面是没有函数对象身上的属性和方法
+      // 函数对象是函数对象，实例是实例，实例只跟构造函数原型对象上属性方法有关系
+      // such as
+      Phone.prototype.price = "7999";
+      console.log(apple.price); //7 999
+    </script>
+  </body>
+</html>
