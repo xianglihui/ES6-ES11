@@ -41,3 +41,39 @@ class XiaoMi {
 let xiaomi = new XiaoMi("小米11", 1999); // XiaoMi {type: '小米11', price: 1999}
 console.log(xiaomi);
 ```
+
+函数对象与实例对象属性是不相通的
+
+```javascript
+function phone() {}
+phone.change = function () {
+  console.log("我可以打电话");
+};
+phone.name = "小米";
+// 构造函数
+const Phone = new phone();
+console.log("Phone", Phone.name); // undefined
+// 普通函数
+console.log("Phone", phone.name); // phone
+
+// prototype
+phone.prototype.size = 5;
+// class是个语法糖，本质是基于原型链
+console.log(Phone.size); // 5
+```
+
+`change`与`name`是属于函数对象`phone`的,不属于实例对象`Phone`,`change`与`name`属于静态**静态资源**，换到面向对象时，`change`与`name`属于类
+
+```javascript
+// class
+class newPhone {
+  // 静态资源
+  static name = "华为";
+  static change() {
+    console.log("5G");
+  }
+}
+const Huawei = new newPhone();
+console.log(Huawei.name); // undefined
+console.log(newPhone.name); // 华为
+```
