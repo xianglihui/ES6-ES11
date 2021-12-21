@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function phone() {}
+      phone.change = function () {
+        console.log("我可以打电话");
+      };
+      phone.name = "小米";
+
+      // 构造函数
+      const Phone = new phone();
+      console.log("Phone", Phone.name); // undefined
+
+      // 普通函数
+      console.log("Phone", phone.name); // phone
+
+      // prototype
+      phone.prototype.size = 5;
+      // class是个语法糖，本质是基于原型链
+      console.log(Phone.size); // 5
+
+      // class
+      class newPhone {
+        // 静态资源
+        static name = "华为";
+        static change() {
+          console.log("5G");
+        }
+      }
+      const Huawei = new newPhone();
+      console.log(Huawei.name); // undefined
+      console.log(newPhone.name); // 华为
+    </script>
+  </body>
+</html>
