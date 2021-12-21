@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // es5
+      // 父类
+      function Phone(brand, price) {
+        this.brand = brand;
+        this.price = price;
+      }
+      Phone.prototype.call = function () {
+        console.log("打电话");
+      };
+
+      // 子类
+      function MobilePhone(brand, price, color, size) {
+        // 通过Phone.call改变Phone的this指向,传入this(这个this指向MobilePhone中的this,也就是MobilePhone的实例对象)
+        Phone.call(this, brand, price);
+        // 特性
+        this.color = color;
+        this.size = size;
+      }
+
+      // 设置子类构造函数的原型
+      MobilePhone.prototype = new Phone();
+
+      // 声明子类的方法
+      MobilePhone.prototype.photo = function () {
+        console.log("咔擦");
+      };
+
+      MobilePhone.prototype.playGame = function () {
+        console.log("打豆豆");
+      };
+
+      const xiaomi = new MobilePhone("小米", 1999, "白色", "5");
+      console.log(xiaomi);
+    </script>
+  </body>
+</html>
