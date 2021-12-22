@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Phone {
+        get price() {
+          console.log("价格被读取");
+          return "123";
+        }
+
+        set price(newVal) {
+          console.log("价格被修改了");
+        }
+      }
+      const xiaomi = new Phone();
+      // 打印了两个值，一个是价格被读取，一个是undefined
+      // 对price这个属性的读取，会执行price函数里面的代码，若调用retrun，返回的就是这个属性的值
+      console.log(xiaomi.price); // 123
+
+      xiaomi.price = "free"; // 价格被修改了
+    </script>
+  </body>
+</html>

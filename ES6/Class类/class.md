@@ -77,6 +77,7 @@ const Huawei = new newPhone();
 console.log(Huawei.name); // undefined
 console.log(newPhone.name); // 华为
 ```
+
 ## 类的静态成员
 
 ```javascript
@@ -146,4 +147,76 @@ MobilePhone.prototype.playGame = function () {
 };
 const xiaomi = new MobilePhone("小米", 1999, "白色", "5");
 console.log(xiaomi);
+```
+
+es6
+
+```javascript
+// 父类
+class Phone {
+  // 构造方法
+  constructor(brand, price) {
+    this.brand = brand;
+    this.price = price;
+  }
+  // 父类方法
+  call() {
+    console.log("call");
+  }
+}
+// 子类 继承父类 关键词 extends
+class MobilePhone extends Phone {
+  constructor(brand, price, color, size) {
+    // 相当于父类构造器
+    super(brand, price); // Phone.call(this,brand,price)
+    this.color = color;
+    this.size = size;
+  }
+  photo() {
+    console.log("photo");
+  }
+}
+// 实例化
+const xiaomi = new MobilePhone("小米", 1999, "白色", 5);
+console.log(xiaomi);
+```
+
+es6 重写父类方法
+
+```javascript
+class MobilePhone extends Phone {
+  constructor(brand, price, color, size) {
+    // 相当于父类构造器
+    super(brand, price); // Phone.call(this,brand,price)
+    this.color = color;
+    this.size = size;
+  }
+  photo() {
+    console.log("photo");
+  }
+  call() {
+    console.log("call2");
+  }
+}
+const xiaomi = new MobilePhone("小米", 1999, "白色", 5);
+xiaomi.call(); // call2
+```
+
+## set 与 get
+
+```javascript
+class Phone {
+  get price() {
+    console.log("价格被读取");
+    return "123";
+  }
+  set price(newVal) {
+    console.log("价格被修改了");
+  }
+}
+const xiaomi = new Phone();
+// 打印了两个值，一个是价格被读取，一个是undefined
+// 对price这个属性的读取，会执行price函数里面的代码，若调用retrun，返回的就是这个属性的值
+console.log(xiaomi.price); // 123
+xiaomi.price = "free"; // 价格被修改了
 ```
