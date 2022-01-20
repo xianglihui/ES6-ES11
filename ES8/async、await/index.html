@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 普通函数
+      function fn() {}
+      console.log(fn); // ƒ fn() {}
+      // asnyc 函数
+      async function asyncFn() {}
+      console.log(asyncFn()); // Promise {<fulfilled>: undefined}
+
+      // 返回的结果不是一个promise类型的对象，则这个函数的返回结果就是一个成功的promise
+      // if undefined
+      async function asFn() {
+        return;
+      }
+      //[[Prototype]]: Promise
+      //[[PromiseState]]: "fulfilled"
+      //[[PromiseResult]]: undefined
+      console.log(asFn());
+
+      // if 抛出错误
+      async function errFn() {
+        // throw new Error("报错");
+      }
+      // [[Prototype]]: Promise
+      // [[PromiseState]]: "rejected"
+      // [[PromiseResult]]: Error: 报错 at errFn
+      console.log(errFn());
+
+      // if return promise对象
+      async function PormiseFn() {
+        return new Promise((resolve, rejected) => {
+          resolve("成功");
+        });
+      }
+      // [[Prototype]]: Promise
+      // [[PromiseState]]: "fulfilled"
+      // [[PromiseResult]]: "成功"
+      console.log(PormiseFn());
+    </script>
+  </body>
+</html>
